@@ -2,39 +2,48 @@
 pragma solidity ^0.8.13;
 
 library HTML {
-    struct Strings {
-        string[] parts;
+    struct HTMLEl {
+        string tag;
+        string style;
+        string content;
     }
 
-    struct Bytes {
-        bytes[] parts;
+    // struct HTMLEl {
+    //     bytes4 tag;
+    //     bytes4 style;
+    //     bytes24 content;
+    // }
+
+    function render(HTMLEl memory $) internal pure returns (string memory) {
+        return
+            string(
+                abi.encodePacked(
+                    "<",
+                    $.tag,
+                    ' style="',
+                    $.style,
+                    '">',
+                    $.content,
+                    "</",
+                    $.tag,
+                    ">"
+                )
+            );
     }
 
-    function initializeStrings() internal pure returns (Strings memory) {
-        return Strings(new string[](0));
-    }
-
-    function initializeBytes() internal pure returns (Bytes memory) {
-        return Bytes(new bytes[](0));
-    }
-
-    function joinStrings(
-        Strings storage content,
-        string memory stringToAdd
-    ) internal {
-        content.parts.push(stringToAdd);
-    }
-
-    function concatBytes(
-        Bytes storage content,
-        bytes memory bytesToAdd
-    ) internal {
-        content.parts.push(bytesToAdd);
-    }
-
-    function concatFromStrings(
-        Strings memory content
+    function style(
+        HTMLEl memory element,
+        string memory _style
     ) internal pure returns (string memory) {
-        return string(abi.encodePacked(content.parts));
+        element.style = _style;
+        return render(element);
     }
+
+    // function style(
+    //     HTMLEl memory element,
+    //     bytes4 newStyle
+    // ) internal pure returns (string memory) {
+    //     element.style = element.style | newStyle;
+    //     return render(element);
+    // }
 }
