@@ -34,6 +34,8 @@ contract HTMLTest is Test {
             parsedStyle
         );
         assertEq("Hello, World!", parsedContent);
+
+        emit log_named_string("COMPONENT", renderedHTML);
     }
 
     function parseRendered(
@@ -50,7 +52,7 @@ contract HTMLTest is Test {
         uint256 startTag = LibString.indexOf(html, "<", 0) + 1;
         uint256 endTag = LibString.indexOf(html, " ", 0) - (startTag - 1);
         rTag = LibString.slice(html, startTag, endTag);
-        emit log_string(rTag);
+        emit log_named_string("TAG", rTag);
 
         // Extract the style
         uint256 startStyle = LibString.indexOf(html, 'style="', endTag + 1);
@@ -58,12 +60,13 @@ contract HTMLTest is Test {
             startStyle += 7;
             uint256 endStyle = LibString.indexOf(html, '"', startStyle + 1);
             rStyle = LibString.slice(html, startStyle, endStyle);
-            emit log_string(rStyle);
+            emit log_named_string("STYLE", rStyle);
         }
 
         // Extract the content
         uint256 startContent = LibString.indexOf(html, ">", 0) + 1;
         uint256 endContent = LibString.indexOf(html, "<", startContent + 1);
         rContent = LibString.slice(html, startContent, endContent);
+        emit log_named_string("INNER CONTENT", rContent);
     }
 }
