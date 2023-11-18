@@ -14,6 +14,7 @@ library HTML {
         a
     }
 
+    // TODO: Add check for href attribute if tag is 'a'
     function render(Element memory $) internal pure returns (string memory) {
         return
             string(
@@ -24,6 +25,26 @@ library HTML {
                     $.style,
                     '">',
                     $.content,
+                    "</",
+                    getTag($.tag),
+                    ">"
+                )
+            );
+    }
+
+    function updateContent(
+        Element memory $,
+        string memory _content
+    ) internal pure returns (string memory) {
+        return
+            string(
+                abi.encodePacked(
+                    "<",
+                    getTag($.tag),
+                    ' style="',
+                    $.style,
+                    '">',
+                    _content,
                     "</",
                     getTag($.tag),
                     ">"
