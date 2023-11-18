@@ -7,10 +7,12 @@ import {HTML} from "../src/HTML.sol";
 
 contract HTMLTest is Test {
     HTML.Element public element;
+    HTML.Tag public tag;
 
     function setUp() public {
+        tag = HTML.Tag.div;
         element = HTML.Element(
-            "div",
+            tag,
             "color: white; background-color: #1e1e1e; font-size: 18px;",
             "Hello, World!"
         );
@@ -28,7 +30,7 @@ contract HTMLTest is Test {
         ) = parseRendered(renderedHTML);
 
         // Assert the values
-        assertEq("div", parsedTag);
+        assertEq(HTML.getTag(tag), parsedTag);
         assertEq(
             "color: white; background-color: #1e1e1e; font-size: 18px;",
             parsedStyle
@@ -37,6 +39,35 @@ contract HTMLTest is Test {
 
         emit log_named_string("COMPONENT", renderedHTML);
     }
+
+    // function testFuzz_Render(string memory _tag) public {
+    //     string memory blank = "";
+    //     vm.assume(!LibString.eq(_tag, blank));
+    //     // Convert the input tag to lowercase
+    //     tag = stringToTag(_tag);
+
+    //     // Set the HTML element tag to the fuzzed tag
+    //     element.tag = tagToString(tag);
+
+    //     string memory renderedHTML = HTML.render(element);
+
+    //     // Parse the renderedHTML
+    //     (
+    //         string memory parsedTag,
+    //         string memory parsedStyle,
+    //         string memory parsedContent
+    //     ) = parseRendered(renderedHTML);
+
+    //     // Assert the values
+    //     assertEq(_tag, parsedTag);
+    //     assertEq(
+    //         "color: white; background-color: #1e1e1e; font-size: 18px;",
+    //         parsedStyle
+    //     );
+    //     assertEq("Hello, World!", parsedContent);
+
+    //     emit log_named_string("COMPONENT", renderedHTML);
+    // }
 
     function parseRendered(
         string memory html
