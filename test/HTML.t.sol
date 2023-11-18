@@ -18,7 +18,7 @@ contract HTMLTest is Test {
 
     function test_Render() public {
         string memory renderedHTML = HTML.render(element);
-        emit log_string(renderedHTML);
+        // emit log_string(renderedHTML);
 
         // Parse the renderedHTML
         (
@@ -40,7 +40,6 @@ contract HTMLTest is Test {
         string memory html
     )
         internal
-        pure
         returns (
             string memory rTag,
             string memory rStyle,
@@ -48,18 +47,23 @@ contract HTMLTest is Test {
         )
     {
         // Extract the tag
-        uint256 startTag = indexOf(html, "<", 0) + 1;
-        uint256 endTag = indexOf(html, ">", startTag + 1);
-        rTag = slice(html, startTag, endTag);
+        uint256 startTag = LibString.indexOf(html, "<", 0) + 1;
+        uint256 endTag = LibString.indexOf(html, " ", 0) - (startTag - 1);
+        rTag = LibString.slice(html, startTag, endTag);
+        emit log_string(rTag);
 
         // Extract the style
-        uint256 startStyle = indexOf(html, 'style="', endTag + 1) + 7;
-        uint256 endStyle = indexOf(html, '"', startStyle + 1);
-        rStyle = slice(html, startStyle, endStyle);
+        uint256 startStyle = LibString.indexOf(html, 'style="', endTag + 1);
+        if (startStyle != type(uint256).max) {
+            startStyle += 7;
+            uint256 endStyle = LibString.indexOf(html, '"', startStyle + 1);
+            rStyle = LibString.slice(html, startStyle, endStyle);
+            emit log_string(rStyle);
+        }
 
         // Extract the content
-        uint256 startContent = endStyle + 2;
-        uint256 endContent = indexOf(html, "<", startContent + 1);
-        rContent = slice(html, startContent, endContent);
+        uint256 startContent = LibString.indexOf(html, ">", 0) + 1;
+        uint256 endContent = LibString.indexOf(html, "<", startContent + 1);
+        rContent = LibString.slice(html, startContent, endContent);
     }
 }
