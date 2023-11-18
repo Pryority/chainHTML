@@ -2,19 +2,19 @@
 pragma solidity ^0.8.13;
 
 library HTML {
-    struct HTMLEl {
+    struct Element {
         string tag;
         string style;
         string content;
     }
 
-    // struct HTMLEl {
+    // struct Element {
     //     bytes4 tag;
     //     bytes4 style;
     //     bytes24 content;
     // }
 
-    function render(HTMLEl memory $) internal pure returns (string memory) {
+    function render(Element memory $) internal pure returns (string memory) {
         return
             string(
                 abi.encodePacked(
@@ -32,7 +32,7 @@ library HTML {
     }
 
     function style(
-        HTMLEl memory element,
+        Element memory element,
         string memory _style
     ) internal pure returns (string memory) {
         element.style = _style;
@@ -40,7 +40,7 @@ library HTML {
     }
 
     // function style(
-    //     HTMLEl memory element,
+    //     Element memory element,
     //     bytes4 newStyle
     // ) internal pure returns (string memory) {
     //     element.style = element.style | newStyle;

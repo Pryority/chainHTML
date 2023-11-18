@@ -6,10 +6,10 @@ import "solady-utils/LibString.sol";
 import {HTML} from "../src/HTML.sol";
 
 contract HTMLTest is Test {
-    HTML.HTMLEl public element;
+    HTML.Element public element;
 
     function setUp() public {
-        element = HTML.HTMLEl(
+        element = HTML.Element(
             "div",
             "color: white; background-color: #1e1e1e; font-size: 18px;",
             "Hello, World!"
