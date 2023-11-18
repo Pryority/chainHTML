@@ -100,4 +100,17 @@ contract HTMLTest is Test {
         rContent = LibString.slice(html, startContent, endContent);
         emit log_named_string("INNER CONTENT", rContent);
     }
+
+    // function tagToString(HTML.Tag _tag) internal pure returns (string memory) {
+    //     if (_tag == HTML.Tag.div) {
+    //         return "div";
+    //     } else if (_tag == HTML.Tag.button) {
+    //         return "button";
+    //     } else if (_tag == HTML.Tag.a) {
+    //         return "a";
+    //     }
+    //     // Add more mappings as needed for other enum values
+
+    //     revert("Invalid tag");
+    // }
 }
