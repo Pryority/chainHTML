@@ -1,14 +1,33 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
 
-contract Counter {
-    uint256 public number;
+import "./HTML.sol";
 
-    function setNumber(uint256 newNumber) public {
-        number = newNumber;
-    }
+interface IHTML {
+    function render(
+        HTML.Element memory $
+    ) external pure returns (string memory);
+}
 
-    function increment() public {
-        number++;
+contract UIWrapper is IHTML {
+    constructor() {}
+
+    function render(
+        HTML.Element memory $
+    ) external pure override returns (string memory) {
+        return
+            string(
+                abi.encodePacked(
+                    "<",
+                    HTML.getTag($.tag),
+                    ' style="',
+                    $.style,
+                    '">',
+                    $.content,
+                    "</",
+                    HTML.getTag($.tag),
+                    ">"
+                )
+            );
     }
 }
