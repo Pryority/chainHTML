@@ -3,29 +3,29 @@ pragma solidity ^0.8.13;
 
 library HTML {
     struct Element {
-        string tag;
+        Tag tag;
         string style;
         string content;
     }
 
-    // struct Element {
-    //     bytes4 tag;
-    //     bytes4 style;
-    //     bytes24 content;
-    // }
+    enum Tag {
+        div,
+        button,
+        a
+    }
 
     function render(Element memory $) internal pure returns (string memory) {
         return
             string(
                 abi.encodePacked(
                     "<",
-                    $.tag,
+                    getTag($.tag),
                     ' style="',
                     $.style,
                     '">',
                     $.content,
                     "</",
-                    $.tag,
+                    getTag($.tag),
                     ">"
                 )
             );
@@ -39,11 +39,14 @@ library HTML {
         return render(element);
     }
 
-    // function style(
-    //     Element memory element,
-    //     bytes4 newStyle
-    // ) internal pure returns (string memory) {
-    //     element.style = element.style | newStyle;
-    //     return render(element);
-    // }
+    function getTag(HTML.Tag _tag) public pure returns (string memory) {
+        if (_tag == HTML.Tag.div) {
+            return "div";
+        } else if (_tag == HTML.Tag.button) {
+            return "button";
+        } else if (_tag == HTML.Tag.a) {
+            return "a";
+        }
+        return "div";
+    }
 }
