@@ -40,35 +40,6 @@ contract HTMLTest is Test {
         emit log_named_string("COMPONENT", renderedHTML);
     }
 
-    // function testFuzz_Render(string memory _tag) public {
-    //     string memory blank = "";
-    //     vm.assume(!LibString.eq(_tag, blank));
-    //     // Convert the input tag to lowercase
-    //     tag = stringToTag(_tag);
-
-    //     // Set the HTML element tag to the fuzzed tag
-    //     element.tag = tagToString(tag);
-
-    //     string memory renderedHTML = HTML.render(element);
-
-    //     // Parse the renderedHTML
-    //     (
-    //         string memory parsedTag,
-    //         string memory parsedStyle,
-    //         string memory parsedContent
-    //     ) = parseRendered(renderedHTML);
-
-    //     // Assert the values
-    //     assertEq(_tag, parsedTag);
-    //     assertEq(
-    //         "color: white; background-color: #1e1e1e; font-size: 18px;",
-    //         parsedStyle
-    //     );
-    //     assertEq("Hello, World!", parsedContent);
-
-    //     emit log_named_string("COMPONENT", renderedHTML);
-    // }
-
     function parseRendered(
         string memory html
     )
@@ -100,6 +71,35 @@ contract HTMLTest is Test {
         rContent = LibString.slice(html, startContent, endContent);
         emit log_named_string("INNER CONTENT", rContent);
     }
+
+    // function testFuzz_Render(string memory _tag) public {
+    //     string memory blank = "";
+    //     vm.assume(!LibString.eq(_tag, blank));
+    //     // Convert the input tag to lowercase
+    //     tag = stringToTag(_tag);
+
+    //     // Set the HTML element tag to the fuzzed tag
+    //     element.tag = tagToString(tag);
+
+    //     string memory renderedHTML = HTML.render(element);
+
+    //     // Parse the renderedHTML
+    //     (
+    //         string memory parsedTag,
+    //         string memory parsedStyle,
+    //         string memory parsedContent
+    //     ) = parseRendered(renderedHTML);
+
+    //     // Assert the values
+    //     assertEq(_tag, parsedTag);
+    //     assertEq(
+    //         "color: white; background-color: #1e1e1e; font-size: 18px;",
+    //         parsedStyle
+    //     );
+    //     assertEq("Hello, World!", parsedContent);
+
+    //     emit log_named_string("COMPONENT", renderedHTML);
+    // }
 
     // function tagToString(HTML.Tag _tag) internal pure returns (string memory) {
     //     if (_tag == HTML.Tag.div) {
