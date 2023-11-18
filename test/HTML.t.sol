@@ -2,6 +2,7 @@
 pragma solidity ^0.8.13;
 
 import {Test} from "forge-std/Test.sol";
+import "solady-utils/LibString.sol";
 import {HTML} from "../src/HTML.sol";
 
 contract HTMLTest is Test {
