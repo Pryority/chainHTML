@@ -33,6 +33,42 @@ function render(
     }
 ```
 
+### Style HTML -- [src/HTML.sol](src/HTML.sol)
+
+```solidity
+function style(
+        Element memory element,
+        string memory _style
+    ) internal pure returns (string memory) {
+        element.style = _style;
+        return render(element);
+    }
+```
+
+### Update HTML Inner Text Content -- [src/HTML.sol](src/HTML.sol)
+
+```solidity
+function updateContent(
+        Element memory element,
+        string memory _content
+    ) internal pure returns (string memory) {
+        return
+            string(
+                abi.encodePacked(
+                    "<",
+                    getTag(element.tag),
+                    ' style="',
+                    element.style,
+                    '">',
+                    _content,
+                    "</",
+                    getTag(element.tag),
+                    ">"
+                )
+            );
+    }
+```
+
 ## Using Foundry to interact with chainHTML
 
 ### Build
