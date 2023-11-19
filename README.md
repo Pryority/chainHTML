@@ -10,7 +10,7 @@ Inspired by [ilamanov](https://github.com/ilamanov)'s Research and Development w
 
 ## Documentation
 
-### Render HTML -- [src/HTML.sol](src/HTML.sol#L18)
+### [Render Element](src/HTML.sol#L18)
 
 ```solidity
 function render(
@@ -33,7 +33,7 @@ function render(
     }
 ```
 
-### Update HTML Inner Text Content -- [src/HTML.sol](src/HTML.sol#L37)
+### [Update Content of Element](src/HTML.sol#L37)
 
 ```solidity
 function updateContent(
@@ -57,7 +57,7 @@ function updateContent(
     }
 ```
 
-### Style HTML -- [src/HTML.sol](src/HTML.sol#L57)
+### [Add Style to Element](src/HTML.sol#L57)
 
 ```solidity
 function style(
