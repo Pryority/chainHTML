@@ -60,8 +60,14 @@ contract HTMLTest is Test {
 
         emit log_named_string("UNSTYLED", renderedUnstyledHTML);
 
+        HTML.Element memory renderedStyledHTML = HTML.Element(
+            HTML.Tag.a,
+            "background-color: #1e1e1e;",
+            "I am a styled anchor"
+        );
+
         string memory renderedStyledUpdatedHTML = HTML.updateContent(
-            el,
+            renderedStyledHTML,
             "I am a styled anchor"
         );
 
@@ -107,7 +113,7 @@ contract HTMLTest is Test {
      * @return rTag The tag from the rendered HTML.
      * @return rStyle The style from the rendered HTML.
      * @return rContent The content from the rendered HTML.
-     * @dev Note: This should not work properly when using other attributes like href, class, etc.
+     * @dev Note: This does not work properly when using other attributes like href, class, etc.
      */
     function parseRendered(
         string memory html
