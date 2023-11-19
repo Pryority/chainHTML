@@ -15,38 +15,40 @@ library HTML {
     }
 
     // TODO: Add check for href attribute if tag is 'a'
-    function render(Element memory $) internal pure returns (string memory) {
+    function render(
+        Element memory element
+    ) internal pure returns (string memory) {
         return
             string(
                 abi.encodePacked(
                     "<",
-                    getTag($.tag),
+                    getTag(element.tag),
                     ' style="',
-                    $.style,
+                    element.style,
                     '">',
-                    $.content,
+                    element.content,
                     "</",
-                    getTag($.tag),
+                    getTag(element.tag),
                     ">"
                 )
             );
     }
 
     function updateContent(
-        Element memory $,
+        Element memory element,
         string memory _content
     ) internal pure returns (string memory) {
         return
             string(
                 abi.encodePacked(
                     "<",
-                    getTag($.tag),
+                    getTag(element.tag),
                     ' style="',
-                    $.style,
+                    element.style,
                     '">',
                     _content,
                     "</",
-                    getTag($.tag),
+                    getTag(element.tag),
                     ">"
                 )
             );
