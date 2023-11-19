@@ -10,7 +10,7 @@ Inspired by [ilamanov](https://github.com/ilamanov)'s Research and Development w
 
 ## Documentation
 
-### Render HTML -- [src/HTML.sol](src/HTML.sol)
+### Render HTML -- [src/HTML.sol](src/HTML.sol#L18)
 
 ```solidity
 function render(
@@ -33,19 +33,7 @@ function render(
     }
 ```
 
-### Style HTML -- [src/HTML.sol](src/HTML.sol)
-
-```solidity
-function style(
-        Element memory element,
-        string memory _style
-    ) internal pure returns (string memory) {
-        element.style = _style;
-        return render(element);
-    }
-```
-
-### Update HTML Inner Text Content -- [src/HTML.sol](src/HTML.sol)
+### Update HTML Inner Text Content -- [src/HTML.sol](src/HTML.sol#L37)
 
 ```solidity
 function updateContent(
@@ -66,6 +54,18 @@ function updateContent(
                     ">"
                 )
             );
+    }
+```
+
+### Style HTML -- [src/HTML.sol](src/HTML.sol#L57)
+
+```solidity
+function style(
+        Element memory element,
+        string memory _style
+    ) internal pure returns (string memory) {
+        element.style = _style;
+        return render(element);
     }
 ```
 
