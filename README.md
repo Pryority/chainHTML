@@ -1,19 +1,39 @@
-## Foundry
+## chainHTML
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+**A WIP Solidity Library for building interactive HTML components onchain.**
 
-Foundry consists of:
+Tested and Built with:
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+-   **Foundry**: Ethereum development framework (Hardhat but in Solidity).
+
+Inspired by [ilamanov](https://github.com/ilamanov)'s Research and Development with **[on-chain-ui](https://github.com/ilamanov/on-chain-ui/tree/main)**: Build and compose UI components on-chain.
 
 ## Documentation
 
-https://book.getfoundry.sh/
+### Render HTML -- [src/HTML.sol](src/HTML.sol)
 
-## Usage
+```solidity
+function render(
+        Element memory element
+    ) internal pure returns (string memory) {
+        return
+            string(
+                abi.encodePacked(
+                    "<",
+                    getTag(element.tag),
+                    ' style="',
+                    element.style,
+                    '">',
+                    element.content,
+                    "</",
+                    getTag(element.tag),
+                    ">"
+                )
+            );
+    }
+```
+
+## Using Foundry to interact with chainHTML
 
 ### Build
 
