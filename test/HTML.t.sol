@@ -22,14 +22,12 @@ contract HTMLTest is Test {
         string memory renderedHTML = HTML.render(element);
         // emit log_string(renderedHTML);
 
-        // Parse the renderedHTML
         (
             string memory parsedTag,
             string memory parsedStyle,
             string memory parsedContent
         ) = parseRendered(renderedHTML);
 
-        // Assert the values
         assertEq(HTML.getTag(tag), parsedTag);
         assertEq(
             "color: white; background-color: #1e1e1e; font-size: 18px;",
@@ -61,11 +59,6 @@ contract HTMLTest is Test {
         assertEq(parsedContent, "I am an unstyled anchor");
 
         emit log_named_string("UNSTYLED", renderedUnstyledHTML);
-
-        string memory renderedStyledHTML = HTML.style(
-            el,
-            "background-color: #1e1e1e;"
-        );
 
         string memory renderedStyledUpdatedHTML = HTML.updateContent(
             el,
@@ -114,7 +107,7 @@ contract HTMLTest is Test {
      * @return rTag The tag from the rendered HTML.
      * @return rStyle The style from the rendered HTML.
      * @return rContent The content from the rendered HTML.
-     * @dev Note: This does not work properly when using other attributes like href, class, etc.
+     * @dev Note: This should not work properly when using other attributes like href, class, etc.
      */
     function parseRendered(
         string memory html
