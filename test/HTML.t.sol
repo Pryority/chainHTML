@@ -17,6 +17,30 @@ contract HTMLTest is Test {
         );
     }
 
+    function test_El() public {
+        string memory renderedHTML = HTML.render(element);
+        // emit log_string(renderedHTML);
+
+        (
+            string memory parsedTag,
+            string memory parsedStyle,
+            string memory parsedContent
+        ) = HTML.parseRendered(renderedHTML);
+
+        emit log_named_string("TAG", parsedTag);
+        emit log_named_string("STYLE", parsedStyle);
+        emit log_named_string("CONTENT", parsedContent);
+
+        assertEq(HTML.getTag(tag), parsedTag);
+        assertEq(
+            "color: white; background-color: #1e1e1e; font-size: 18px;",
+            parsedStyle
+        );
+        assertEq("Hello, World!", parsedContent);
+
+        emit log_named_string("COMPONENT", renderedHTML);
+    }
+
     function test_Render() public {
         string memory renderedHTML = HTML.render(element);
         // emit log_string(renderedHTML);
